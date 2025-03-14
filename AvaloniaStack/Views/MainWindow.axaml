@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaStack.ViewModels"
+        x:Class="AvaloniaStack.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Управление стеком"
+        Width="400"
+        Height="350">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <StackPanel Margin="20" Spacing="10">
+        <TextBox Text="{Binding Input}" Watermark="Введите элемент"/>
+        
+        <Button Content="Добавить (Push)" Command="{Binding PushCommand}" Margin="0,5"/>
+        <Button Content="Извлечь (Pop)" Command="{Binding PopCommand}" Margin="0,5"/>
+        <Button Content="Очистить" Command="{Binding ClearCommand}" Margin="0,5"/>
+        
+        <TextBlock Text="{Binding TopItem, StringFormat='Верхний элемент: {0}'}"
+           FontSize="16" FontWeight="Bold" Margin="0,10"/>
+
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Количество элементов:" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Text="{Binding Count}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
+
+            <TextBlock Text="Пустой стек:" Grid.Row="1" Grid.Column="0" Margin="0,5"/>
+            <TextBlock Text="{Binding IsEmpty}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,5"/>
+        </Grid>
+
+        <TextBlock Text="{Binding Status}" Foreground="Gray" Margin="0,10"/>
+    </StackPanel>
+</Window>
